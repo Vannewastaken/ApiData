@@ -46,19 +46,20 @@ server.post("/auth/forgot-password", (req, res) => {
       .write();
   }
 
+  // Enlace de recuperación con esquema personalizado
   const resetLink = `appGestor://reset-password?token=${token}`;
-
-
-
-
 
   transporter.sendMail(
     {
       from: '"Soporte" <v.cisternasob@gmail.com>',
       to: email,
       subject: "Recuperación de contraseña",
-      html: `<p>Haz clic en el enlace para restablecer tu contraseña:</p>
-             <a href="${resetLink}">${resetLink}</a>`,
+      html: `
+        <p>Haz clic en el enlace para restablecer tu contraseña:</p>
+        <a href="${resetLink}" style="color: blue; text-decoration: underline;">Restablecer Contraseña</a>
+        <p>Si el enlace no funciona, copia y pega este URL en tu navegador:</p>
+        <p>${resetLink}</p>
+      `,
     },
     (err) => {
       if (err) {
