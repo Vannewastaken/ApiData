@@ -72,30 +72,20 @@
       "email":"usuario1@mail.cl"
     }
   ],
-  "registros": [
+"registros": [
     {
-      "id": "0eec",
+      "id": "18c1",
       "eventoId": "1",
-      "usuarioId": "1",
-      "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:13:53.088Z",
-      "asistencia":true
+      "username": "usuario1",
+      "fechaRegistro": "2024-12-15T19:38:16.890Z",
+      "asistencia": true
     },
     {
-      "id": "bfbd",
+      "id": "8ce3",
       "eventoId": "2",
-      "usuarioId": "351855064",
-      "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:15:54.693Z",
-      "asistencia":true
-    },
-    {
-      "id": "bsdas",
-      "eventoId": "2",
-      "usuarioId": "1",
-      "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:15:54.693Z",
-      "asistencia":true
+      "username": "usuario1",
+      "fechaRegistro": "2024-12-15T19:43:42.449Z",
+      "asistencia": false
     }
   ],
   "comentarios": [
