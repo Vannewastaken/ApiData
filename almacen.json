@@ -78,21 +78,24 @@
       "eventoId": "1",
       "usuarioId": "1",
       "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:13:53.088Z"
+      "fechaRegistro": "2024-10-23T17:13:53.088Z",
+      "asistencia":true
     },
     {
       "id": "bfbd",
       "eventoId": "2",
       "usuarioId": "351855064",
       "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:15:54.693Z"
+      "fechaRegistro": "2024-10-23T17:15:54.693Z",
+      "asistencia":true
     },
     {
       "id": "bsdas",
       "eventoId": "2",
       "usuarioId": "1",
       "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:15:54.693Z"
+      "fechaRegistro": "2024-10-23T17:15:54.693Z",
+      "asistencia":true
     }
   ],
   "comentarios": [
