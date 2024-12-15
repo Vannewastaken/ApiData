@@ -46,7 +46,8 @@ server.post("/auth/forgot-password", (req, res) => {
       .write();
   }
 
-  const resetLink = `http://192.168.100.1:8100/reset-password?token=${token}`;
+  const resetLink = `myapp://reset-password?token=${token}`;
+
 
 
 
