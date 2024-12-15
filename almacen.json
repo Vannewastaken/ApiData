@@ -65,6 +65,7 @@
   "asistente":[
     {
       "id":"1",
+      "idevento":"1",
       "nombre":"Conferencia de tecnología",
       "fecha":"2024-10-23T17:13:53.088Z",
       "rut":"21717528",
