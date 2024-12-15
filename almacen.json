@@ -62,22 +62,29 @@
       "resetTokenExpiry": null
     }
   ],
+  "asistente":[
+    {
+      "id":"1",
+      "nombre":"Conferencia de tecnología",
+      "fecha":"2024-10-23T17:13:53.088Z",
+      "rut":"21717528",
+      "email":"usuario1@mail.cl"
+    }
+  ],
   "registros": [
     {
       "id": "0eec",
       "eventoId": "1",
       "usuarioId": "1",
       "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:13:53.088Z",
-      "asistencia": true
+      "fechaRegistro": "2024-10-23T17:13:53.088Z"
     },
     {
       "id": "bfbd",
       "eventoId": "2",
       "usuarioId": "351855064",
       "rut": "21717528",
-      "fechaRegistro": "2024-10-23T17:15:54.693Z",
-      "asistencia": false
+      "fechaRegistro": "2024-10-23T17:15:54.693Z"
     },
     {
       "id": "bsdas",
