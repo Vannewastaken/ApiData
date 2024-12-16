@@ -47,29 +47,28 @@ server.post("/auth/forgot-password", (req, res) => {
       .write();
   }
 
-  // Enlace HTTPS intermedio
-  const resetLink = `https://miapp.com/reset-password?token=${token}`;
+  const resetLink = `miapp://reset-password?token=${token}`;
 
-  transporter.sendMail(
-    {
-      from: '"Soporte" <v.cisternasob@gmail.com>',
-      to: email,
-      subject: "Recuperación de contraseña",
-      html: `
-        <p>Haz clic en el enlace para restablecer tu contraseña:</p>
-        <a href="${resetLink}" style="color: blue; text-decoration: underline;">Restablecer Contraseña</a>
-        <p>Si tienes problemas, copia y pega este enlace en tu navegador:</p>
-        <p>${resetLink}</p>
-      `,
-    },
-    (err) => {
-      if (err) {
-        console.error("Error al enviar el correo:", err);
-        return res.status(500).json({ message: "Error al enviar el correo" });
-      }
-      res.json({ message: "Correo enviado con éxito" });
+transporter.sendMail(
+  {
+    from: '"Soporte" <v.cisternasob@gmail.com>',
+    to: email,
+    subject: "Recuperación de contraseña",
+    html: `
+      <p>Haz clic en el enlace para restablecer tu contraseña:</p>
+      <a href="${resetLink}" style="color: blue; text-decoration: underline;">Restablecer Contraseña</a>
+      <p>Si tienes problemas, copia y pega este enlace en tu navegador:</p>
+      <p>${resetLink}</p>
+    `,
+  },
+  (err) => {
+    if (err) {
+      console.error("Error al enviar el correo:", err);
+      return res.status(500).json({ message: "Error al enviar el correo" });
     }
-  );
+    res.json({ message: "Correo enviado con éxito" });
+  }
+);
 });
 
 // Ruta para redirigir desde HTTPS al esquema personalizado
