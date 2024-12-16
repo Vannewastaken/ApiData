@@ -47,8 +47,8 @@ server.post("/auth/forgot-password", (req, res) => {
       .write();
   }
 
-  // Usamos un enlace HTTPS intermedio
-  const resetLink = `miapp://reset-password?token=${token}`;
+  // Enlace HTTPS intermedio
+  const resetLink = `https://miapp.com/reset-password?token=${token}`;
 
   transporter.sendMail(
     {
@@ -72,7 +72,7 @@ server.post("/auth/forgot-password", (req, res) => {
   );
 });
 
-// Ruta para redirigir desde HTTPS al esquema personalizado (opcional, puede no ser necesaria)
+// Ruta para redirigir desde HTTPS al esquema personalizado
 server.get("/reset-password", (req, res) => {
   const token = req.query.token; // Capturamos el token de la URL
   if (!token) {
