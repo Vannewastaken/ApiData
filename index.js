@@ -74,10 +74,12 @@ server.post("/auth/forgot-password", (req, res) => {
 
 // Ruta para redirigir desde HTTPS al esquema personalizado
 server.get("/reset-password", (req, res) => {
-  const token = req.query.token; // Capturamos el token de la URL
+  const token = req.query.token; // Captura el token desde los parámetros
   if (!token) {
-    return res.status(400).json({ message: "Token no proporcionado" });
+    return res.status(400).send("Token no proporcionado");
   }
+  console.log("Redirigiendo a esquema personalizado con token:", token);
+  // Redirige al esquema personalizado de la app
   res.redirect(`miapp://reset-password?token=${token}`);
 });
 
