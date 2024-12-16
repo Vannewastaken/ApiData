@@ -34,6 +34,7 @@ server.post("/auth/forgot-password", (req, res) => {
   const token = crypto.randomBytes(32).toString("hex");
   const expiry = Date.now() + 3600000; // 1 hora
 
+  // Asigna el token y su vencimiento al usuario correspondiente
   if (db.get("usuarios").find({ email }).value()) {
     db.get("usuarios")
       .find({ email })
@@ -47,7 +48,7 @@ server.post("/auth/forgot-password", (req, res) => {
   }
 
   // Usamos un enlace HTTPS intermedio
-  const resetLink = `https://miapp.com/reset-password?token=${token}`;
+  const resetLink = `miapp://reset-password?token=${token}`;
 
   transporter.sendMail(
     {
@@ -63,6 +64,7 @@ server.post("/auth/forgot-password", (req, res) => {
     },
     (err) => {
       if (err) {
+        console.error("Error al enviar el correo:", err);
         return res.status(500).json({ message: "Error al enviar el correo" });
       }
       res.json({ message: "Correo enviado con éxito" });
@@ -70,15 +72,22 @@ server.post("/auth/forgot-password", (req, res) => {
   );
 });
 
-// Ruta para redirigir desde HTTPS al esquema personalizado
+// Ruta para redirigir desde HTTPS al esquema personalizado (opcional, puede no ser necesaria)
 server.get("/reset-password", (req, res) => {
   const token = req.query.token; // Capturamos el token de la URL
-  res.redirect(`appGestor://reset-password?token=${token}`);
+  if (!token) {
+    return res.status(400).json({ message: "Token no proporcionado" });
+  }
+  res.redirect(`miapp://reset-password?token=${token}`);
 });
 
 // Ruta para restablecer contraseña
 server.post("/auth/reset-password", (req, res) => {
   const { token, password } = req.body;
+
+  if (!token || !password) {
+    return res.status(400).json({ message: "Token o contraseña no proporcionados" });
+  }
 
   const db = router.db;
   let user = db.get("usuarios").find(u => u.resetToken === token && u.resetTokenExpiry > Date.now()).value() ||
@@ -88,6 +97,7 @@ server.post("/auth/reset-password", (req, res) => {
     return res.status(400).json({ message: "Token inválido o expirado" });
   }
 
+  // Restablece la contraseña y elimina el token
   if (db.get("usuarios").find({ resetToken: token }).value()) {
     db.get("usuarios")
       .find({ resetToken: token })
@@ -103,6 +113,13 @@ server.post("/auth/reset-password", (req, res) => {
   res.json({ message: "Contraseña restablecida con éxito" });
 });
 
+// Middleware para loguear solicitudes
+server.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
+
+// Configuración del servidor
 server.use(router);
 server.listen(port, () => {
   console.log(`Servidor ejecutándose en http://localhost:${port}`);
